@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+		 <style>
+			 div.title{
+			 	width: 500px;
+				 
+			 	border: 1px solid black;
+			 }
+			 button{
+			 	height:100%;
+			 }
+		 </style>
+    </head>
+    <body>
+		 <div>
+		 	<input type="file" id="directory_upload" multiple>
+		 </div>
+		 <div>
+			 <ul></ul>
+		 </div>
+		 <audio id="audio-container"> 
+        <source id="audio-source" src="" /> 
+			 
+        Your browser does not support the audio format.
+      </audio>
+		 <script>
+		 	const input = document.querySelector('input');
+
+			 const list=[]
+			input.addEventListener('change', showTextFile);
+
+			function showTextFile() {
+				 const selectedFiles = input.files
+				 console.log(input.files)
+				 
+				 Object.keys(selectedFiles).forEach((index)=> {
+					 const li = document.createElement("li");
+					  list.push(selectedFiles[index].name);
+					 li.innerHTML = selectedFiles[index].name;
+					 document.querySelector("ul").append(li)
+				 })
+				console.log(list);
+				initAudio();
+			}
+		 </script>
+		 <script>
+			 const oneLoop = false;
+			 const allLoop = true;
+			 let audioIndex = 0;
+			 
+			 const audio = document.querySelector("audio")
+			 
+			 function initAudio(){ 
+				audio.controls = true;
+				audio.volume = 0.2;
+				audio.querySelector("source").src = "audio/"+list[audioIndex]
+				playAudio();
+				audio.addEventListener("ended",()=>{
+				audioIndex++;
+				if(audioIndex>= list.length) audioIndex = 0;
+				audio.querySelector("source").src = "audio/"+list[audioIndex]
+				playAudio()
+			 }) 
+			 }
+			 function playAudio(){
+				 audio.load();
+				 audio.loop=oneLoop;
+				 audio.play();
+			 }
+			 
+			 
+		 </script>
+	</body>
+</html>
