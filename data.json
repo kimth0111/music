@@ -1,0 +1,14 @@
+{
+  "option": {
+    "startVolume": 0.1,
+    "loopStyle": "one"
+  },
+  "playList": [
+    {
+      "name": "재생목록1",
+      "musicList": [],
+      "option": {}
+    }
+  ],
+  "musicListAll": []
+}
