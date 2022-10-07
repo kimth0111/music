@@ -89,6 +89,7 @@ class Music {
     this.currentIndex = 0;
     this.audio = document.querySelector("audio");
     this.playing = false;
+    this.errorList = [];
   }
   get musicLength() {
     return this.musicList.length;
@@ -159,6 +160,12 @@ class Music {
       this.currentIndex = this.playingListLength - 1;
     }
     this.start();
+  }
+  error() {
+    if (!this.errorList.includes(this.currentIndex)) this.errorList.push(this.currentIndex);
+    if (this.errorList.length >= this.musicLength) return;
+
+    this.next();
   }
 }
 
@@ -317,3 +324,7 @@ function showTextFile() {
   console.log(list);
   localStorage.setItem("music-data", JSON.stringify(musicData));
 }
+
+document.querySelector("source").addEventListener("error", () => {
+  currentMusic.error();
+});
