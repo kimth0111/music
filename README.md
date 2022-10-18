@@ -1,3 +1,5 @@
+노래의 플레이리스트를 저장하고, 플레이리스트를 반복 재생하는 앱입니다
+
 Code 누르고 DownloadZip
 
 다운로드한 파일 압축 풀기
@@ -8,4 +10,4 @@ Code 누르고 DownloadZip
 사이트에서 노래리스트 추가하기 누른 후 audio폴더 선택
 
 
-![Screenshot 2022-10-18 9 54 27 PM](https://user-images.githubusercontent.com/105792805/196435429-29a7acda-2ae4-4ce4-913e-53541b321d55.png)
+![Screenshot 2022-10-18 9 56 41 PM](https://user-images.githubusercontent.com/105792805/196436041-6edc81ae-c641-4ecb-ae9e-9e656c252f28.png)
