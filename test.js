@@ -157,7 +157,7 @@ class Music {
   prev() {
     this.currentIndex--;
     if (this.currentIndex < 0) {
-      this.currentIndex = this.playingListLength - 1;
+      this.currentIndex = this.musicLength - 1;
     }
     this.start();
   }
