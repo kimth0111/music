@@ -71,8 +71,12 @@ class PlayList {
       document.querySelector(".playlist-dropdown").append(a);
     });
   }
-  play() {
+  play(random=false) {
     currentMusic = new Music(this);
+	 if(random)
+	 {
+	 	currentMusic.shuffle();
+	 }
     currentMusic.init();
   }
   changeName(name) {
@@ -82,7 +86,6 @@ class PlayList {
 
 class Music {
   constructor(data) {
-    this.musicList = data.musicList;
     this.name = data.name;
     this.option = data.option;
     this.musicList = data.musicList;
@@ -95,6 +98,8 @@ class Music {
     return this.musicList.length;
   }
   init() {
+	  if(this.option.isRandom == undefined)
+		  this.option.isRandom = false;
     this.draw();
     this.start();
   }
@@ -134,8 +139,10 @@ class Music {
   }
   play() {
     this.audio.play();
+	  document.title = this.musicList[this.currentIndex]+"......";
   }
   end() {
+	  
     if (this.option.isShuffle) {
       // Math.random(0,)
     } else {
@@ -147,8 +154,14 @@ class Music {
     this.audio.pause();
   }
   next() {
+	 const pre = this.currentIndex;
     this.currentIndex++;
-    console.log(this.currentIndex, this.musicLength);
+	 if(this.option.isRandom)
+		 this.currentIndex = Math.floor(Math.random()*this.musicLength);
+	 while(this.currentIndex == pre){
+		console.log(this.currentIndex)
+	 	this.currentIndex = Math.floor(Math.random()*this.musicLength);	
+	 }
     if (this.currentIndex >= this.musicLength) {
       this.currentIndex = 0;
     }
@@ -167,6 +180,9 @@ class Music {
 
     this.next();
   }
+  shuffle(){
+  	this.musicList.sort(() => Math.random() - 0.5);
+  }
 }
 
 let currentPlayList;
@@ -176,6 +192,7 @@ let musicData = JSON.parse(localStorage.getItem("music-data")) || {
   option: {
     startVolume: 0.1,
     loopStyle: "all",
+	 isRandom: false
   },
   currentId: 0,
   playList: {},
@@ -204,6 +221,10 @@ window.onload = () => {
   document.querySelector(".play-btn").addEventListener("click", () => {
     currentPlayList.play();
   });
+  document.querySelector(".play-random-btn").addEventListener("click", () => {
+    currentPlayList.play(true);
+  });	
+	
   document.querySelector(".save-btn").addEventListener("click", () => {
     currentPlayList.save();
   });
