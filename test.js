@@ -120,6 +120,11 @@ class Music {
                 <span>${name}</span>
               </div>
       `;
+		 div.addEventListener('click',()=>{
+			 console.log(index); 
+			 this.currentIndex = index; 
+			 this.start();
+		 });
       if (index == this.currentIndex) {
         div.classList.add("selected");
         toScroll = { div, index };
